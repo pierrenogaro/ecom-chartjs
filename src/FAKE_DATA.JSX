@@ -18,7 +18,7 @@ export const lineChartData = {
         {
             label : "Steps by Pedro's girlfriend",
             data: [3000, 5000, 5500, 8000, 1200, 11000, 15000],
-            borderColor : "rgb(75,192,192)"
+            borderColor : "rgb(192,75,96)"
         }
     ]
 }
