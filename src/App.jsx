@@ -5,7 +5,7 @@ import {PieChart} from "./components/Pie.jsx";
 function App() {
   return (
       <div className='App'>
-          <LineGraph/>
+          <PieChart/>
       </div>
   )
 }

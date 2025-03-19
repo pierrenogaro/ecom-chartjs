@@ -19,7 +19,19 @@ ChartJS.register(
 );
 
 export const BarChart = () => {
-    const options = {}
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Ventes par Catégorie de Produits'
+            }
+        }
+    }
+
     return <Bar options={options} data={barChartData} />
 
 }

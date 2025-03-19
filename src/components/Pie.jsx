@@ -5,7 +5,18 @@ import {pieChartData} from "../FAKE_DATA.JSX";
 ChartJS.register(Tooltip, Legend, ArcElement);
 
 export const PieChart = () => {
-    const options = {};
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Ventes par Catégorie de Produits'
+            }
+        }
+    }
 
     return <Pie options={options} data={pieChartData} />;
 };

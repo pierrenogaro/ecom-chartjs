@@ -29,7 +29,7 @@ export const LineGraph = () => {
             },
             title : {
                 display: true,
-                text: "this is a graph representation"
+                text: 'Ventes par Catégorie de Produits'
             }
         }
     }
