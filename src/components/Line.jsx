@@ -24,4 +24,5 @@ export const LineGraph = () => {
     const options = {}
 
     return <Line options={options} data={lineChartData}/>
+
 }
