@@ -1,5 +1,6 @@
-import {Line} from 'react-chartjs-2'
-import {Chart as ChartJS,
+import { Line } from 'react-chartjs-2'
+import {
+    Chart as ChartJS,
     CategoryScale,
     LinearScale,
     PointElement,
@@ -8,7 +9,7 @@ import {Chart as ChartJS,
     Tooltip,
     Legend,
 } from 'chart.js'
-import {lineChartData} from "../FAKE_DATA.JSX";
+import { lineChartData, locationLineChartData } from "../FAKE_DATA.JSX";
 
 ChartJS.register(
     CategoryScale,
@@ -19,21 +20,55 @@ ChartJS.register(
     Tooltip,
     Legend,
 );
-export const LineGraph = () => {
 
-    const options = {
+export const LineGraph = () => {
+    const options1 = {
         responsive: true,
         plugins: {
             legend: {
-                position:'top',
+                position: 'top',
             },
-            title : {
+            title: {
                 display: true,
                 text: 'Ventes par Catégorie de Produits'
             }
         }
     }
 
-    return <Line options={options} data={lineChartData}/>
+    const options2 = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Évolution des Utilisateurs par Pays'
+            }
+        }
+    }
 
+    return (
+        <div className="container">
+            <div className="row mb-5">
+                <div className="col-12">
+                    <div className="card shadow-sm">
+                        <div className="card-body">
+                            <Line options={options1} data={lineChartData} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-12">
+                    <div className="card shadow-sm">
+                        <div className="card-body">
+                            <Line options={options2} data={locationLineChartData} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
 }

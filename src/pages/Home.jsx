@@ -36,8 +36,8 @@ export const Home = () => {
         <div className="container py-5">
             <div className="row text-center mb-5">
                 <div className="col">
-                    <h1>Tableau de Bord des Ventes</h1>
-                    <p className="lead">Sélectionnez un type de graphique pour visualiser les données de ventes par catégorie de produits</p>
+                    <h1>Tableau de Bord </h1>
+                    <p className="lead">Sélectionnez un type de graphique :</p>
                 </div>
             </div>
 
