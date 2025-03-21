@@ -9,7 +9,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js'
-import { lineChartData, locationLineChartData } from "../FAKE_DATA.JSX";
+import {lineChartData, locationLineChartData, paymentLineChartData} from "../FAKE_DATA.JSX";
 
 ChartJS.register(
     CategoryScale,
@@ -48,6 +48,19 @@ export const LineGraph = () => {
         }
     }
 
+    const options3 = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Évolution des Moyens de Paiement (€)'
+            }
+        }
+    }
+
     return (
         <div className="container">
             <div className="row mb-5">
@@ -60,11 +73,21 @@ export const LineGraph = () => {
                 </div>
             </div>
 
-            <div className="row">
+            <div className="row mb-5">
                 <div className="col-12">
                     <div className="card shadow-sm">
                         <div className="card-body">
                             <Line options={options2} data={locationLineChartData} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="row mb-5">
+                <div className="col-12">
+                    <div className="card shadow-sm">
+                        <div className="card-body">
+                            <Line options={options3} data={paymentLineChartData} />
                         </div>
                     </div>
                 </div>

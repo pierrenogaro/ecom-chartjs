@@ -122,7 +122,6 @@ export const pieChartData = {
     ],
 };
 
-
 export const locationLineChartData = {
     labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin'],
     datasets: [
@@ -214,6 +213,82 @@ export const locationPieChartData = {
                 "rgba(236, 45, 45, 1)",
                 "rgba(46, 75, 160, 1)",
                 "rgba(129, 129, 129, 1)"
+            ],
+            borderWidth: 1
+        }
+    ]
+};
+
+export const paymentLineChartData = {
+    labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin'],
+    datasets: [
+        {
+            label: "Carte de crédit",
+            data: [4500, 5200, 4800, 5500, 6200, 7100],
+            backgroundColor: "rgba(54, 162, 235, 0.6)",
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 1,
+            tension: 0.4
+        },
+        {
+            label: "PayPal",
+            data: [2500, 2900, 3300, 3800, 4100, 4600],
+            backgroundColor: "rgba(255, 99, 132, 0.6)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1,
+            tension: 0.4
+        },
+        {
+            label: "Apple Pay",
+            data: [1200, 1100, 980, 1050, 1300, 1500],
+            backgroundColor: "rgba(255, 206, 86, 0.6)",
+            borderColor: "rgba(255, 206, 86, 1)",
+            borderWidth: 1,
+            tension: 0.4
+        }
+    ]
+};
+export const paymentBarChartData = {
+    labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin'],
+    datasets: [
+        {
+            label: "Carte de crédit",
+            data: [4500, 5200, 4800, 5500, 6200, 7100],
+            backgroundColor: "rgba(54, 162, 235, 0.6)",
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 1
+        },
+        {
+            label: "PayPal",
+            data: [2500, 2900, 3300, 3800, 4100, 4600],
+            backgroundColor: "rgba(255, 99, 132, 0.6)",
+            borderColor: "rgba(255, 99, 132, 1)",
+            borderWidth: 1
+        },
+        {
+            label: "Apple Pay",
+            data: [1200, 1100, 980, 1050, 1300, 1500],
+            backgroundColor: "rgba(255, 206, 86, 0.6)",
+            borderColor: "rgba(255, 206, 86, 1)",
+            borderWidth: 1
+        }
+    ]
+};
+export const paymentPieChartData = {
+    labels: ['Carte de crédit', 'PayPal', 'Apple Pay'],
+    datasets: [
+        {
+            label: "Répartition des moyens de paiement (%)",
+            data: [45, 30, 10],
+            backgroundColor: [
+                "rgba(54, 162, 235, 0.6)",
+                "rgba(255, 99, 132, 0.6)",
+                "rgba(255, 206, 86, 0.6)",
+            ],
+            borderColor: [
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 99, 132, 1)",
+                "rgba(255, 206, 86, 1)",
             ],
             borderWidth: 1
         }

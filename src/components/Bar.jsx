@@ -8,7 +8,7 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js'
-import { barChartData, locationBarChartData } from "../FAKE_DATA.JSX";
+import {barChartData, locationBarChartData, paymentBarChartData} from "../FAKE_DATA.JSX";
 
 ChartJS.register(
     CategoryScale,
@@ -46,6 +46,19 @@ export const BarChart = () => {
         }
     }
 
+    const options3 = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Comparaison des Moyens de Paiement par Mois (€)'
+            }
+        }
+    }
+
     return (
         <div className="container">
             <div className="row mb-5">
@@ -58,11 +71,21 @@ export const BarChart = () => {
                 </div>
             </div>
 
-            <div className="row">
+            <div className="row mb-5">
                 <div className="col-12">
                     <div className="card shadow-sm">
                         <div className="card-body">
                             <Bar options={options2} data={locationBarChartData} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="row mb-5">
+                <div className="col-12">
+                    <div className="card shadow-sm">
+                        <div className="card-body">
+                            <Bar options={options3} data={paymentBarChartData} />
                         </div>
                     </div>
                 </div>
