@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { Bar } from 'react-chartjs-2'
 import {
     Chart as ChartJS,
@@ -8,7 +9,6 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js'
-import {barChartData, locationBarChartData, paymentBarChartData} from "../FAKE_DATA.JSX";
 
 ChartJS.register(
     CategoryScale,
@@ -20,33 +20,43 @@ ChartJS.register(
 );
 
 export const BarChart = () => {
-    const options1 = {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Ventes par Catégorie de Produits'
-            }
-        }
-    }
+    const [alcoolData, setAlcoolData] = useState({
+        labels: [],
+        datasets: [{
+            label: "Nombre d'ingrédients par alcool",
+            data: [],
+            backgroundColor: "rgba(54, 162, 235, 0.6)",
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 1
+        }]
+    });
 
-    const options2 = {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Nombre d\'Utilisateurs par Pays et par Mois'
-            }
-        }
-    }
+    useEffect(() => {
+        const fetchAlcools = async () => {
+            try {
+                const response = await fetch('http://localhost:8081/alcools/all');
+                const alcools = await response.json();
 
-    const options3 = {
+                const labels = alcools.map(alcool => alcool.name);
+                const ingredientCounts = alcools.map(alcool => alcool.ingredients ? alcool.ingredients.length : 0);
+
+                setAlcoolData(prevState => ({
+                    ...prevState,
+                    labels: labels,
+                    datasets: [{
+                        ...prevState.datasets[0],
+                        data: ingredientCounts
+                    }]
+                }));
+            } catch (error) {
+                console.error('Erreur lors de la récupération des alcools:', error);
+            }
+        };
+
+        fetchAlcools();
+    }, []);
+
+    const options = {
         responsive: true,
         plugins: {
             legend: {
@@ -54,7 +64,7 @@ export const BarChart = () => {
             },
             title: {
                 display: true,
-                text: 'Comparaison des Moyens de Paiement par Mois (€)'
+                text: 'Nombre d\'ingrédients par alcool'
             }
         }
     }
@@ -65,27 +75,7 @@ export const BarChart = () => {
                 <div className="col-12">
                     <div className="card shadow-sm">
                         <div className="card-body">
-                            <Bar options={options1} data={barChartData} />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="row mb-5">
-                <div className="col-12">
-                    <div className="card shadow-sm">
-                        <div className="card-body">
-                            <Bar options={options2} data={locationBarChartData} />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="row mb-5">
-                <div className="col-12">
-                    <div className="card shadow-sm">
-                        <div className="card-body">
-                            <Bar options={options3} data={paymentBarChartData} />
+                            <Bar options={options} data={alcoolData} />
                         </div>
                     </div>
                 </div>

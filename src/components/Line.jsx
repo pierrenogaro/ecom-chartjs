@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { Line } from 'react-chartjs-2'
 import {
     Chart as ChartJS,
@@ -9,7 +10,6 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js'
-import {lineChartData, locationLineChartData, paymentLineChartData} from "../FAKE_DATA.JSX";
 
 ChartJS.register(
     CategoryScale,
@@ -22,33 +22,44 @@ ChartJS.register(
 );
 
 export const LineGraph = () => {
-    const options1 = {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Ventes par Catégorie de Produits'
-            }
-        }
-    }
+    const [alcoolData, setAlcoolData] = useState({
+        labels: [],
+        datasets: [{
+            label: "Degrés d'alcool par alcool",
+            data: [],
+            backgroundColor: "rgba(75, 192, 192, 0.6)",
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+            tension: 0.4
+        }]
+    });
 
-    const options2 = {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Évolution des Utilisateurs par Pays'
-            }
-        }
-    }
+    useEffect(() => {
+        const fetchAlcools = async () => {
+            try {
+                const response = await fetch('http://localhost:8081/alcools/all');
+                const alcools = await response.json();
 
-    const options3 = {
+                const labels = alcools.map(alcool => alcool.name);
+                const degrees = alcools.map(alcool => parseFloat(alcool.degree));
+
+                setAlcoolData(prevState => ({
+                    ...prevState,
+                    labels: labels,
+                    datasets: [{
+                        ...prevState.datasets[0],
+                        data: degrees
+                    }]
+                }));
+            } catch (error) {
+                console.error('Erreur lors de la récupération des alcools:', error);
+            }
+        };
+
+        fetchAlcools();
+    }, []);
+
+    const options = {
         responsive: true,
         plugins: {
             legend: {
@@ -56,7 +67,7 @@ export const LineGraph = () => {
             },
             title: {
                 display: true,
-                text: 'Évolution des Moyens de Paiement (€)'
+                text: 'Degrés d\'alcool par alcool'
             }
         }
     }
@@ -67,27 +78,7 @@ export const LineGraph = () => {
                 <div className="col-12">
                     <div className="card shadow-sm">
                         <div className="card-body">
-                            <Line options={options1} data={lineChartData} />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="row mb-5">
-                <div className="col-12">
-                    <div className="card shadow-sm">
-                        <div className="card-body">
-                            <Line options={options2} data={locationLineChartData} />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className="row mb-5">
-                <div className="col-12">
-                    <div className="card shadow-sm">
-                        <div className="card-body">
-                            <Line options={options3} data={paymentLineChartData} />
+                            <Line options={options} data={alcoolData} />
                         </div>
                     </div>
                 </div>
